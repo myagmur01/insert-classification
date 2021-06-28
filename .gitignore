@@ -1,6 +1,12 @@
 
+# Ignore following folders
 data/train
 data/validation
+models/*
+test/
 
+predict_test.py
+
+# Except following files
 !data/.gitkeep
 !models/.gitkeep

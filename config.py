@@ -17,16 +17,21 @@ history_base = "results/simple_model_loss_accuracy_curve.png"
 history_finetuned = "results/finetuned_model_loss_accuracy_curve.png"
 history_scratch_model = "results/scratch_model_loss_accuracy_curve.png"
 
-BATCH_SIZE = 8
-IMG_SIZE = (224, 224)
-learning_rate = 0.0001
-initial_epochs = 2
-fine_tune_epochs = 2
-class_mode = "binary"
-last_activation = "softmax"
 num_classes = 2
 channels = 3
 num_folds = 10
+BATCH_SIZE = 8
+IMG_SIZE = (224, 224)
+
+learning_rate = 0.0001
+initial_epochs = 5
+fine_tune_epochs = 10
+
+class_mode = "binary"
+last_activation = "sigmoid"
+focal_loss = False
+
+
 
 
 

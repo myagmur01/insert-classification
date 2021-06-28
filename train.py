@@ -9,6 +9,7 @@ from sklearn.model_selection import KFold
 from tensorflow.keras.optimizers import Adagrad
 
 from insertnet import InsertNet
+from utils.focal_loss import BinaryFocalLoss
 from utils.get_class_weihgts import calculate_class_weights
 from utils.plot_training import plot_accuracy_loss_curve
 
@@ -46,7 +47,9 @@ class InsertClassifier():
         self.fine_tune_epochs = config.fine_tune_epochs
         self.class_mode = config.class_mode
         self.num_classes = config.num_classes
+
         self.num_folds = config.num_folds
+        self.focal_loss = config.focal_loss
 
         self.imagenet_mean = np.array([123.68, 116.779, 103.939], dtype="float32")
 
@@ -161,7 +164,7 @@ class InsertClassifier():
         loss = self.history_base.history['loss']
         val_loss = self.history_base.history['val_loss']
 
-        plot_accuracy_loss_curve(acc, val_acc, val_loss, figure_save_path=config.history_base)
+        plot_accuracy_loss_curve(acc, val_acc , loss, val_loss, figure_save_path=config.history_base)
         # ----------------------------------------------------------------------------
         # Set pretrained model unfreeze and train from certain convolution layers
         # ----------------------------------------------------------------------------
@@ -177,9 +180,15 @@ class InsertClassifier():
         for layer in self.base_model.layers[:fine_tune_at]:
             layer.trainable = False
 
-        self.model.compile(loss=tf.keras.losses.BinaryCrossentropy(from_logits=True),
-                      optimizer=tf.keras.optimizers.RMSprop(lr=self.learning_rate / 10),
-                      metrics=['accuracy'])
+        if self.focal_loss:
+            self.model.compile(loss=BinaryFocalLoss(gamma=2),
+                               optimizer=tf.keras.optimizers.RMSprop(lr=self.learning_rate / 10),
+                               metrics=['accuracy'])
+
+        else:
+            self.model.compile(loss=tf.keras.losses.BinaryCrossentropy(from_logits=True),
+                          optimizer=tf.keras.optimizers.RMSprop(lr=self.learning_rate / 10),
+                          metrics=['accuracy'])
 
         self.model.summary()
         # ----------------------------------------------------------------------------
@@ -213,7 +222,7 @@ class InsertClassifier():
         loss += self.history_finetuned.history['loss']
         val_loss += self.history_finetuned.history['val_loss']
 
-        plot_accuracy_loss_curve(acc, val_acc, val_loss, figure_save_path=config.history_finetuned)
+        plot_accuracy_loss_curve(acc, val_acc , loss, val_loss, figure_save_path=config.history_finetuned)
         # ----------------------------------------------------------------------------
 
     def train_from_scratch(self):
@@ -276,7 +285,7 @@ class InsertClassifier():
         loss = self.history_scratch_model.history['loss']
         val_loss = self.history_scratch_model.history['val_loss']
 
-        plot_accuracy_loss_curve(acc, val_acc, val_loss, figure_save_path=config.history_scratch_model)
+        plot_accuracy_loss_curve(acc, val_acc , loss, val_loss, figure_save_path=config.history_scratch_model)
         # ----------------------------------------------------------------------------
 
 
