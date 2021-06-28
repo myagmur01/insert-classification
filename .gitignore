@@ -1,7 +1,6 @@
 
-/data/train
-/data/validation
-/test
-/models
+data/train
+data/validation
 
-.DS_Store
+!data/.gitkeep
+!models/.gitkeep
