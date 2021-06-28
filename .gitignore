@@ -1,0 +1,7 @@
+
+/data/train
+/data/validation
+/test
+/models
+
+.DS_Store
