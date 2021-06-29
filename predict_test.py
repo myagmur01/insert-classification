@@ -5,7 +5,7 @@ from tensorflow.keras.preprocessing.image import img_to_array
 from tensorflow.keras.utils import to_categorical
 
 
-
+#-----------------------------------------------------------------
 # test_image = image.load_img('dataset/single_predictioncat_or_dog_1.jpg' ,
 #                             test_size = (64 , 64))
 # test_image = image.img_to_array(test_image)
@@ -13,6 +13,7 @@ from tensorflow.keras.utils import to_categorical
 # result = cnn.predic(test_image)
 # training_set.class_indices
 
+#-----------------------------------------------------------------
 # tf.keras.Model.load_weights()
 #
 # checkpoint_dir = os.path.dirname("models")
@@ -64,8 +65,7 @@ from tensorflow.keras.utils import to_categorical
 #     # show the output image
 #     cv2.imwrite("results/pred.png", output)
 
-
-
+#-----------------------------------------------------------------
 # # plot the training loss and accuracy
 # N = config.fine_tune_epochs
 # plt.style.use("ggplot")
@@ -79,7 +79,7 @@ from tensorflow.keras.utils import to_categorical
 # plt.ylabel("Loss/Accuracy")
 # plt.legend(loc="lower left")
 # plt.savefig(args["plot"])
-
+#-----------------------------------------------------------------
 #Retrieve a batch of images from the test set
 # image_batch, label_batch = test_dataset.as_numpy_iterator().next()
 # predictions = model.predict_on_batch(image_batch).flatten()

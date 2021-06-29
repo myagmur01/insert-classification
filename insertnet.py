@@ -75,7 +75,7 @@ class InsertNet:
         model.add(Dropout(0.5))
 
         # sigmoid classifier
-        model.add(Dense(num_classes))
+        model.add(Dense(1))
         model.add(Activation(last_activation))
 
         return model

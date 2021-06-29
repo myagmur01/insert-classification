@@ -80,8 +80,8 @@ class InsertClassifier():
         # Substract imagenet mean values from images
         # ----------------------------------------------------------------------------
 
-        self.trainAug.mean = self.imagenet_mean
-        self.valAug.mean = self.imagenet_mean
+        #self.trainAug.mean = self.imagenet_mean
+        #self.valAug.mean = self.imagenet_mean
 
         # ----------------------------------------------------------------------------
         # Load data from directory

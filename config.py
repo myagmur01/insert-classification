@@ -8,7 +8,7 @@ TRAIN_DIR = os.path.sep.join([DATA_DIR, "train"])
 VAL_DIR = os.path.sep.join([DATA_DIR, "validation"])
 TEST_DIR = os.path.sep.join([DATA_DIR, "test"])
 
-finuted_model_ckpt_path = "models/finetuned-cp-{epoch:02d}.ckpt"
+finuted_model_ckpt_path = "models/finetuned-cp-05.ckpt.data-00000-of-00001.ckpt"
 scratch_model_ckpt_path = "models/scratch0=-cp-{epoch:02d}.ckpt"
 saveFinetunedModel = "models/resnet50_finetuned.h5"
 saveScratchModel = "models/scratch_model.h5"
@@ -24,8 +24,8 @@ BATCH_SIZE = 8
 IMG_SIZE = (224, 224)
 
 learning_rate = 0.0001
-initial_epochs = 5
-fine_tune_epochs = 10
+initial_epochs = 2
+fine_tune_epochs = 5
 
 class_mode = "binary"
 last_activation = "sigmoid"

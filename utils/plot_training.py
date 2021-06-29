@@ -19,9 +19,10 @@ def plot_accuracy_loss_curve(acc, val_acc , loss, val_loss, figure_save_path):
     plt.plot(val_loss, label='Validation Loss')
     plt.legend(loc='upper right')
     plt.ylabel('Cross Entropy')
-    plt.ylim([0, 1.0])
+    #plt.ylim([0, 1.0])
+    plt.xlabel("Epoch #")
     plt.title('Training and Validation Loss')
-    plt.xlabel('epoch')
+
 
     plt.savefig(figure_save_path)
     # plt.show()
